@@ -10,18 +10,22 @@ const RecipeSchema = new Schema({
         type: String,
         required: false
     },
-    units: {
-        type: String,
-        required: true
-    },
     ingredients: [
         {
             name: {
                 type: String,
                 required: true
             },
+            note: {
+                type: String,
+                required: false
+            },
             quantity: {
                 type: Number,
+                required: true
+            },
+            unit: {
+                type: String,
                 required: true
             }
         }
@@ -33,6 +37,10 @@ const RecipeSchema = new Schema({
     imageUrl: {
         type: String,
         required: false,
+    },
+    slug: {
+        type: String,
+        required: true,
     }
 });
 

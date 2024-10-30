@@ -3,6 +3,7 @@ import express from 'express';
 
 const router = express.Router();
 
+//Get all recipes
 router.get('/', async (req, res) => {
     try {
         res.json(await RecipeModel.find({}));
@@ -11,6 +12,16 @@ router.get('/', async (req, res) => {
     }
 });
 
+//Get single recipe
+router.get('/:slug', async (req, res) => {
+    try {
+        res.json(await RecipeModel.findOne({ slug: req.params.slug }));
+    } catch (error) {
+        res.json(error);
+    }
+});
+
+//Create recipe
 router.post('/', async (req, res) => {
     const newRecipe = new RecipeModel(req.body);
     try {
