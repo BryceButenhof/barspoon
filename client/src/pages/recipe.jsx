@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 const Recipe = () => {
     const { slug } = useParams();
+    const navigate = useNavigate();
     const [ recipe, setRecipe ] = useState({});
     const imgUrl = 'https://tinyurl.com/mai-tai-photo';
 
@@ -26,8 +27,10 @@ const Recipe = () => {
     };
     
     return (
+        <>
+        <h1 className="text-3xl font-bold m-12 text-center cursor-pointer" onClick={() => navigate(-1)}>&lt; Back</h1>
         <div className="flex items-center justify-center">
-            <div className="container mx-auto max-w-sm my-8">
+            <div className="container mx-auto max-w-sm">
                 <div className="border border-gray-300 rounded-md p-4 shadow-lg">
                 <img src={recipe.imageUrl || imgUrl} alt={recipe.name} className="w-full h-60 object-cover mb-4 rounded-md" />
                 <h1 className="text-3xl font-bold my-8">{recipe.name}</h1>
@@ -45,6 +48,7 @@ const Recipe = () => {
                 </div>
             </div>
         </div>
+        </>
     );
 };
 
