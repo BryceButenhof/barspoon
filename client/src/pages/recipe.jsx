@@ -27,7 +27,7 @@ const Recipe = () => {
     
     return (
         <div className="flex items-center justify-center">
-            <div className="container mx-auto max-w-sm ">
+            <div className="container mx-auto max-w-sm my-8">
                 <div className="border border-gray-300 rounded-md p-4 shadow-lg">
                 <img src={recipe.imageUrl || imgUrl} alt={recipe.name} className="w-full h-60 object-cover mb-4 rounded-md" />
                 <h1 className="text-3xl font-bold my-8">{recipe.name}</h1>
