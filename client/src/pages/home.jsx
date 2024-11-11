@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Home = () => {
-    const imgUrl = 'https://tinyurl.com/mai-tai-photo';
+    const defaultImgUrl = 'https://i.etsystatic.com/19543171/r/il/3d2d17/5752287345/il_fullxfull.5752287345_gb9t.jpg';
     const [ recipes, setRecipes ] = useState([]);
     const navigate = useNavigate();
 
@@ -32,8 +32,8 @@ const Home = () => {
 
             <ul className="flex flex-wrap justify-center gap-6 m-10">
                 {recipes.map((recipe) => (
-                    <li key={recipe._id} className="border border-gray-300 rounded-md p-4 shadow-lg cursor-pointer max-w-sm" onClick={() => navigate(`/${recipe.slug}`)}>
-                        <img src={recipe.imageUrl || imgUrl} alt={recipe.name} className="w-full h-60 object-cover mb-4 rounded-md" />
+                    <li key={recipe._id} className="border border-gray-300 rounded-md p-4 shadow-lg cursor-pointer w-96" onClick={() => navigate(`/${recipe.slug}`)}>
+                        <img src={recipe.imageUrl || defaultImgUrl} alt={recipe.name} className="w-full h-60 object-cover mb-4 rounded-md" />
                         <div className="flex justify-between items-center mb-2">
                             <h2 className="text-xl font-semibold">{recipe.name}</h2>
                         </div>

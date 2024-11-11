@@ -8,7 +8,7 @@ const Recipe = () => {
     const { slug } = useParams();
     const navigate = useNavigate();
     const [ recipe, setRecipe ] = useState({});
-    const imgUrl = 'https://tinyurl.com/mai-tai-photo';
+    const defaultImgUrl = 'https://i.etsystatic.com/19543171/r/il/3d2d17/5752287345/il_fullxfull.5752287345_gb9t.jpg';
 
     useEffect(() => {
         const fetchRecipe = async () => {
@@ -24,7 +24,7 @@ const Recipe = () => {
     }, [slug]);
 
     const getFormattedIngredients = (ingredient) => {
-        return `${ingredient.quantity} ${recipe.units} ${ingredient.name}`;
+        return `${ingredient.quantity} ${ingredient.unit || recipe.units} ${ingredient.name}`;
     };
     
     return (
@@ -33,9 +33,9 @@ const Recipe = () => {
                 <FontAwesomeIcon icon={faArrowLeft} size="xs"/> Back
             </p>
             <div className="flex items-center justify-center">
-                <div className="container mx-auto max-w-sm">
+                <div className="container mx-auto w-96">
                     <div className="border border-gray-300 rounded-md p-4 shadow-lg">
-                    <img src={recipe.imageUrl || imgUrl} alt={recipe.name} className="w-full h-60 object-cover mb-4 rounded-md" />
+                    <img src={recipe.imageUrl || defaultImgUrl} alt={recipe.name} className="w-full h-60 object-cover mb-4 rounded-md" />
                     <h1 className="text-3xl font-bold my-8">{recipe.name}</h1>
                     <p className="my-4">{recipe.description}</p>
                     <p className="my-4 font-bold">Ingredients:</p>

@@ -31,4 +31,13 @@ router.post('/', async (req, res) => {
     }
 });
 
+//Delete single recipe
+router.delete('/:slug', async (req, res) => {
+    try {
+        res.json(await RecipeModel.findOneAndDelete({ slug: req.params.slug }));
+    } catch (error) {
+        res.json(error);
+    }
+});
+
 export { router as RecipesRouter };
