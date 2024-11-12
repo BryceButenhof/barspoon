@@ -30,6 +30,18 @@ const Home = () => {
         return recipe.ingredients.map(ingredient => ingredient.name).join(', ');
     };
 
+    const NoResults = () => {
+        if (filteredRecipes.length > 0) {
+            return null;
+        }
+
+        return (
+            <li>
+                <p>No Results</p>
+            </li>
+        );
+    };
+
     return (
         <div className="container mx-auto px-4 h-screen w-screen">
             <h1 className="text-3xl font-bold m-12 text-center">
@@ -50,6 +62,7 @@ const Home = () => {
                         <p className="my-4">{getIngredientsDisplay(recipe)}</p>
                     </li>
                 ))}
+                <NoResults />
             </ul>
         </div>
     );
