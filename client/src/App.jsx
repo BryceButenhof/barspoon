@@ -3,6 +3,8 @@ import { Route, Routes } from 'react-router-dom'
 import Home from './pages/home.jsx'
 import Recipe from './pages/recipe.jsx'
 import Create from './pages/create.jsx'
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   return (
@@ -12,6 +14,7 @@ const App = () => {
         <Route path='/:slug' element={<Recipe />} ></Route>
         <Route path='/create' element={<Create />} ></Route>
       </Routes>
+      <ToastContainer />
     </>
   )
 }

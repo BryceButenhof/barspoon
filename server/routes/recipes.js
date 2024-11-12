@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
     try {
         res.json(await newRecipe.save());
     } catch (error) {
-        res.json(error);
+        res.status(400).json(error);
     }
 });
 

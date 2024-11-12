@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { v4 as uuid } from 'uuid';
 import { useNavigate } from 'react-router-dom';
-
+import { toast } from "react-toastify";
 
 const Create = () => {
     const commonLabelStyle = 'block m-2 text-md font-medium text-white';
@@ -33,8 +33,10 @@ const Create = () => {
     const saveRecipe = async (recipe) => {
         try {
             await axios.post('http://localhost:5050/recipes', recipe);
+            toast.success('Recipe created successfully!');            
             navigate('/');
         } catch (error) {
+            toast.error('Recipe creation failed...')
             console.log(error);
         }
     };
@@ -62,7 +64,7 @@ const Create = () => {
 
     return (
         <div className="flex items-center justify-center">
-            <div className="container mx-auto w-1/2">
+            <div className="container mx-auto w-5/6 md:w-1/2">
                 <p className="text-3xl font-bold m-12 text-center">Create Recipe</p>
                 <form onSubmit={handleSubmit}>
                     <div>

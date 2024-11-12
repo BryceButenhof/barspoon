@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios';
+import { toast } from "react-toastify";
 
 const Recipe = () => {
     const { slug } = useParams();
@@ -30,6 +31,7 @@ const Recipe = () => {
     const deleteRecipe = async () => {
         try {
             await axios.delete(`http://localhost:5050/recipes/${recipe.slug}`);
+            toast.success('Recipe successfully deleted');
             navigate('/');
         } catch (err) {
             console.log(err);
