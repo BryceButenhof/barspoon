@@ -25,7 +25,11 @@ const Recipe = () => {
     }, [slug]);
 
     const getFormattedIngredients = (ingredient) => {
-        return `${ingredient.quantity} ${ingredient.unit || recipe.units} ${ingredient.name}`;
+        let unit = ingredient.unit;
+        if (unit === 'dash' && ingredient.quantity > 1) {
+            unit = 'dashes';
+        }
+        return `${ingredient.quantity} ${unit} ${ingredient.name}`;
     };
 
     const deleteRecipe = async () => {
