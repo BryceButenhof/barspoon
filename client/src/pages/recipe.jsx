@@ -41,6 +41,10 @@ const Recipe = () => {
             console.log(err);
         }
     }
+
+    const editRecipe = async () => {
+        navigate('edit');
+    };
     
     return (
         <>
@@ -65,8 +69,11 @@ const Recipe = () => {
                         <p className="my-4">{recipe.instructions}</p>
                     </div>
                     <div>
-                        <button className="float-right mt-2 mb-24 p-2.5 text-md rounded-lg bg-red-500 text-white" onClick={() => deleteRecipe()}>
-                            Delete Recipe
+                        <button className="float-right mt-2 mb-24 p-2.5 text-md rounded-lg bg-red-500 text-white w-24" onClick={() => deleteRecipe()}>
+                            Delete
+                        </button>
+                        <button className="float-right mt-2 mb-24 mr-2 p-2.5 text-md rounded-lg bg-blue-500 text-white w-24" onClick={() => editRecipe()}>
+                            Edit
                         </button>
                     </div>
                 </div>

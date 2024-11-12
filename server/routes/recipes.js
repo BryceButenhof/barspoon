@@ -21,6 +21,14 @@ router.get('/:slug', async (req, res) => {
     }
 });
 
+router.patch('/:slug', async (req, res) => {
+    try {
+        res.json(await RecipeModel.findOneAndUpdate({ slug: req.params.slug }, new RecipeModel(req.body)));
+    } catch (error) {
+        res.status(400).json(error);
+    }
+});
+
 //Create recipe
 router.post('/', async (req, res) => {
     const newRecipe = new RecipeModel(req.body);
