@@ -14,7 +14,7 @@ const App = () => {
         <Route path='/:slug' element={<Recipe />} ></Route>
         <Route path='/create' element={<Create />} ></Route>
       </Routes>
-      <ToastContainer />
+      <ToastContainer className="top-24"/>
     </>
   )
 }
