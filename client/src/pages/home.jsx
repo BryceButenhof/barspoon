@@ -32,8 +32,8 @@ const Home = () => {
 
             <ul className="flex flex-wrap justify-center gap-6 m-10">
                 {recipes.map((recipe) => (
-                    <li key={recipe._id} className="border border-gray-300 rounded-md p-4 shadow-lg cursor-pointer w-96" onClick={() => navigate(`/${recipe.slug}`)}>
-                        <img src={recipe.imageUrl || defaultImgUrl} alt={recipe.name} className="w-full h-60 object-cover mb-4 rounded-md" />
+                    <li key={recipe._id} className="border bg-gray-700 border-gray-600 rounded-lg p-4 cursor-pointer w-96" onClick={() => navigate(`/${recipe.slug}`)}>
+                        <img src={recipe.imageUrl || defaultImgUrl} alt={recipe.name} className="w-full h-60 object-cover mb-4 rounded-lg" />
                         <div className="flex justify-between items-center mb-2">
                             <h2 className="text-xl font-semibold">{recipe.name}</h2>
                         </div>
