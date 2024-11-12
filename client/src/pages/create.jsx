@@ -85,7 +85,7 @@ const Create = () => {
                         <label className={commonLabelStyle}>Ingredients</label>
                         {ingredients.map((ingredient) => (
                             <div className="flex" key={ingredient.id}>
-                                <button className="text-md rounded-lg bg-red-500 text-white w-[46px] h-[46px] mr-2" onClick={() => deleteIngredient(ingredient.id)}>
+                                <button type="button" className="text-md rounded-lg bg-red-500 text-white w-[46px] h-[46px] mr-2" onClick={() => deleteIngredient(ingredient.id)}>
                                     <FontAwesomeIcon icon={faTrash} size="sm" className="cursor-pointer"/>
                                 </button>
                                 <input className={ingredientInputStyle + ' mr-2 w-1/6'} type="number" step={0.01} onChange={(e) => updateIngredient('quantity', e.target.value, ingredient.id)} />
@@ -97,7 +97,7 @@ const Create = () => {
                             </div>
                         ))}
                     </div>
-                    <button className="block text-md rounded-lg bg-blue-500 text-white w-[46px] h-[46px] mr-2" onClick={addIngredient}>
+                    <button type="button" className="block text-md rounded-lg bg-blue-500 text-white w-[46px] h-[46px] mr-2" onClick={addIngredient}>
                         <FontAwesomeIcon icon={faPlus} size="sm" className="cursor-pointer"/>
                     </button>                    
                     <button className="float-right block w-1/5 mb-24 p-2.5 border text-md rounded-lg bg-green-500 border-green-600 text-white" type="submit">Save</button>
