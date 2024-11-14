@@ -4,12 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios';
 import { toast } from "react-toastify";
+import ConfirmDelete from '../components/confirmDelete';
 
 const Recipe = () => {
     const { slug } = useParams();
     const navigate = useNavigate();
     const [ recipe, setRecipe ] = useState({});
     const [ loading, setLoading ] = useState(true);
+    const [ showConfirm, setShowConfirm ] = useState(false);
     const defaultImgUrl = 'https://i.etsystatic.com/19543171/r/il/3d2d17/5752287345/il_fullxfull.5752287345_gb9t.jpg';
 
     useEffect(() => {
@@ -47,6 +49,10 @@ const Recipe = () => {
     const editRecipe = async () => {
         navigate('edit');
     };
+
+    const onCancel = () => {
+        setShowConfirm(false);
+    };
     
     if (loading) {
         return null;
@@ -75,7 +81,7 @@ const Recipe = () => {
                         <p className="my-4">{recipe.instructions}</p>
                     </div>
                     <div>
-                        <button className="float-right mt-2 mb-24 p-2.5 text-md rounded-lg bg-red-500 text-white w-24" onClick={() => deleteRecipe()}>
+                        <button className="float-right mt-2 mb-24 p-2.5 text-md rounded-lg bg-red-500 text-white w-24" onClick={() => setShowConfirm(true)}>
                             Delete
                         </button>
                         <button className="float-right mt-2 mb-24 mr-2 p-2.5 text-md rounded-lg bg-blue-500 text-white w-24" onClick={() => editRecipe()}>
@@ -84,6 +90,7 @@ const Recipe = () => {
                     </div>
                 </div>
             </div>
+            <ConfirmDelete recipeName={recipe.name} showConfirm={showConfirm} onCancel={onCancel} onDelete={deleteRecipe} />
         </>
     );
 };

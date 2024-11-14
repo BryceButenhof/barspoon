@@ -20,7 +20,7 @@ const RecipeForm = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const slug = recipe.name.trim().toLowerCase().replaceAll(' ', '-');
+        const slug = recipe.name.trim().toLowerCase().replace(/\(|\)/g, "").replaceAll(' ', '-');
         saveRecipe({...recipe, slug});
     }
 
