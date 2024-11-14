@@ -60,19 +60,19 @@ const RecipeForm = (props) => {
             <div>
                 <label className={commonLabelStyle}>Ingredients</label>
                 {recipe.ingredients?.map((ingredient) => (
-                    <div className="flex" key={ingredient.id}>
+                    <div className="flex flex-wrap" key={ingredient.id}>
                         <button type="button" className="text-md rounded-lg bg-red-500 text-white w-[46px] h-[46px] mr-2" 
                             onClick={() => deleteIngredient(ingredient.id)}>
                             <FontAwesomeIcon icon={faTrash} size="sm" className="cursor-pointer"/>
                         </button>
-                        <input className={ingredientInputStyle + ' mr-2 w-1/6'} 
+                        <input className={ingredientInputStyle + ' mr-2 flex-grow md:w-1/6'} 
                             value={ingredient.quantity} type="number" step={0.01} 
                             onChange={(e) => updateIngredient('quantity', e.target.value, ingredient.id)} />
-                        <select className={ingredientInputStyle + ' mr-2'} value={ingredient.unit} onChange={(e) => updateIngredient('unit', e.target.value, ingredient.id)}>
+                        <select className={ingredientInputStyle + ' md:mr-2'} value={ingredient.unit} onChange={(e) => updateIngredient('unit', e.target.value, ingredient.id)}>
                             <option value="oz">oz</option>
                             <option value="dash">dash</option>
                         </select>
-                        <input className={ingredientInputStyle + ' flex-grow'} value={ingredient.name}
+                        <input className={ingredientInputStyle + ' block flex-grow ml-[54px] md:ml-0'} value={ingredient.name}
                             type="text" onChange={(e) => updateIngredient('name', e.target.value, ingredient.id)}/>
                     </div>
                 ))}
