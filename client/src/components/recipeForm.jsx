@@ -47,15 +47,15 @@ const RecipeForm = (props) => {
             </div>
             <div>
                 <label className={commonLabelStyle}>Description</label>
-                <input className={commonInputStyle} type="text" value={recipe.description} onChange={(e) => setRecipe({...recipe, description: e.target.value})} />
+                <textarea className={commonInputStyle} rows="3" value={recipe.description} onChange={(e) => setRecipe({...recipe, description: e.target.value})} />
             </div>
             <div>
                 <label className={commonLabelStyle}>Instructions</label>
-                <input className={commonInputStyle} type="text" value={recipe.instructions} onChange={(e) => setRecipe({...recipe, instructions: e.target.value})} />
+                <textarea className={commonInputStyle} rows="3" value={recipe.instructions} onChange={(e) => setRecipe({...recipe, instructions: e.target.value})} />
             </div>
             <div>
                 <label className={commonLabelStyle}>Image URL</label>
-                <input className={commonInputStyle} type="text" value={recipe.imageUrl} onChange={(e) => setRecipe({...recipe, imageUrl: e.target.value})} />
+                <input className={commonInputStyle} type="url" value={recipe.imageUrl} onChange={(e) => setRecipe({...recipe, imageUrl: e.target.value})} />
             </div>
             <div>
                 <label className={commonLabelStyle}>Ingredients</label>
