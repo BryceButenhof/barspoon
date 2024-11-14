@@ -22,7 +22,8 @@ const Edit = () => {
         ]
     };
 
-    const [recipe, setRecipe] = useState(blankRecipe);
+    const [ recipe, setRecipe ] = useState(blankRecipe);
+    const [ loading, setLoading ] = useState(true);
     const navigate = useNavigate();
     const { slug } = useParams();
 
@@ -39,6 +40,7 @@ const Edit = () => {
                         };
                     })
                 });
+                setLoading(false);
             } catch (err) {
                 console.log(err);
             }
@@ -57,6 +59,10 @@ const Edit = () => {
             console.log(error);
         }
     };
+
+    if (loading) {
+        return null;
+    }
 
     return (
         <div className="flex items-center justify-center">

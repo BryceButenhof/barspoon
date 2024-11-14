@@ -6,6 +6,7 @@ const Home = () => {
     const defaultImgUrl = 'https://i.etsystatic.com/19543171/r/il/3d2d17/5752287345/il_fullxfull.5752287345_gb9t.jpg';
     const [ recipes, setRecipes ] = useState([]);
     const [ filteredRecipes, setFilteredRecipes ] = useState([]);
+    const [ loading, setLoading ] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -14,6 +15,7 @@ const Home = () => {
                 const response = await axios.get("http://localhost:5050/recipes");
                 setRecipes(response.data);
                 setFilteredRecipes(response.data);
+                setLoading(false);
             } catch (err) {
                 console.log(err);
             }
@@ -41,6 +43,10 @@ const Home = () => {
             </li>
         );
     };
+
+    if (loading) {
+        return null;
+    }
 
     return (
         <div className="container mx-auto px-4 h-screen w-screen">

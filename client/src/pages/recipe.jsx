@@ -9,6 +9,7 @@ const Recipe = () => {
     const { slug } = useParams();
     const navigate = useNavigate();
     const [ recipe, setRecipe ] = useState({});
+    const [ loading, setLoading ] = useState(true);
     const defaultImgUrl = 'https://i.etsystatic.com/19543171/r/il/3d2d17/5752287345/il_fullxfull.5752287345_gb9t.jpg';
 
     useEffect(() => {
@@ -16,6 +17,7 @@ const Recipe = () => {
             try {
                 const response = await axios.get(`http://localhost:5050/recipes/${slug}`);
                 setRecipe(response.data);
+                setLoading(false);
             } catch (err) {
                 console.log(err);
             }
@@ -45,6 +47,10 @@ const Recipe = () => {
     const editRecipe = async () => {
         navigate('edit');
     };
+    
+    if (loading) {
+        return null;
+    }
     
     return (
         <>
