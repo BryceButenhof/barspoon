@@ -71,6 +71,7 @@ const RecipeForm = (props) => {
                         <select className={ingredientInputStyle + ' md:mr-2'} value={ingredient.unit} onChange={(e) => updateIngredient('unit', e.target.value, ingredient.id)}>
                             <option value="oz">oz</option>
                             <option value="dash">dash</option>
+                            <option value="pinch">pinch</option>
                         </select>
                         <input className={ingredientInputStyle + ' block flex-grow ml-[54px] md:ml-0'} value={ingredient.name}
                             type="text" onChange={(e) => updateIngredient('name', e.target.value, ingredient.id)}/>
