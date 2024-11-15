@@ -5,6 +5,7 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios';
 import { toast } from "react-toastify";
 import ConfirmDelete from '../components/confirmDelete';
+import NotFound from '../components/notFound';
 
 const Recipe = () => {
     const { slug } = useParams();
@@ -21,6 +22,7 @@ const Recipe = () => {
                 setRecipe(response.data);
                 setLoading(false);
             } catch (err) {
+                setLoading(false);
                 console.log(err);
             }
         };
@@ -56,6 +58,10 @@ const Recipe = () => {
     
     if (loading) {
         return null;
+    }
+
+    if (Object.keys(recipe).length === 0) {
+        return <NotFound />;
     }
     
     return (

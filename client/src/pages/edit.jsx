@@ -4,6 +4,7 @@ import { v4 as uuid } from 'uuid';
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import RecipeForm from '../components/recipeForm.jsx';
+import NotFound from '../components/notFound.jsx';
 
 const Edit = () => {
     const blankRecipe = {
@@ -42,6 +43,8 @@ const Edit = () => {
                 });
                 setLoading(false);
             } catch (err) {
+                setRecipe({});
+                setLoading(false);
                 console.log(err);
             }
         };
@@ -62,6 +65,10 @@ const Edit = () => {
 
     if (loading) {
         return null;
+    }
+
+    if (Object.keys(recipe).length === 0) {
+        return <NotFound />;
     }
 
     return (
