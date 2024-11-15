@@ -54,10 +54,10 @@ const Home = () => {
             	Recipes
             </h1>
             <div className="flex justify-center">
-                <input type="text" className="border text-md rounded-lg block w-3/4 md:w-1/4 p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white"
+                <input type="text" className="border text-md rounded-lg block min-w-96 p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white"
                     placeholder="Search" onChange={(e) => filterRecipes(e.target.value)}/>
             </div>
-            <ul className="flex flex-wrap justify-center gap-6 mt-10">
+            <ul className="flex flex-wrap justify-center gap-6 mt-12">
                 {filteredRecipes.map((recipe) => (
                     <li key={recipe._id} className="border bg-gray-700 border-gray-600 rounded-lg p-4 cursor-pointer w-96" onClick={() => navigate(`/${recipe.slug}`)}>
                         <img src={recipe.imageUrl || defaultImgUrl} alt={recipe.name} className="w-full h-60 object-cover mb-4 rounded-lg" />
