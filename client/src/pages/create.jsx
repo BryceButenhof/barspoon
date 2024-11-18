@@ -27,7 +27,7 @@ const Create = () => {
 
     const saveRecipe = async (recipe) => {
         try {
-            await axios.post('http://localhost:5050/recipes', recipe);
+            await axios.post(`${import.meta.env.VITE_BACKEND_URI}/recipes`, recipe);
             toast.success('Recipe created successfully!');            
             navigate('/');
         } catch (error) {

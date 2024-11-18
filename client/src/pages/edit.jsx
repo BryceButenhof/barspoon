@@ -31,7 +31,7 @@ const Edit = () => {
     useEffect(() => {
         const fetchRecipe = async () => {
             try {
-                const response = await axios.get(`http://localhost:5050/recipes/${slug}`);
+                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URI}/recipes/${slug}`);
                 setRecipe({
                     ...response.data, 
                     ingredients: response.data.ingredients.map(ingredient => {
@@ -54,7 +54,7 @@ const Edit = () => {
 
     const saveRecipe = async (recipe) => {
         try {
-            await axios.patch(`http://localhost:5050/recipes/${slug}`, recipe);
+            await axios.patch(`${import.meta.env.VITE_BACKEND_URI}/recipes/${slug}`, recipe);
             toast.success('Recipe edited successfully!');            
             navigate('/');
         } catch (error) {

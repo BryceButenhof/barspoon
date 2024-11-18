@@ -18,7 +18,7 @@ const Recipe = () => {
     useEffect(() => {
         const fetchRecipe = async () => {
             try {
-                const response = await axios.get(`http://localhost:5050/recipes/${slug}`);
+                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URI}/recipes/${slug}`);
                 setRecipe(response.data);
                 setLoading(false);
             } catch (err) {
@@ -40,7 +40,7 @@ const Recipe = () => {
 
     const deleteRecipe = async () => {
         try {
-            await axios.delete(`http://localhost:5050/recipes/${recipe.slug}`);
+            await axios.delete(`${import.meta.env.VITE_BACKEND_URI}/recipes/${recipe.slug}`);
             toast.success('Recipe successfully deleted');
             navigate('/');
         } catch (err) {

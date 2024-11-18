@@ -12,7 +12,7 @@ const Home = () => {
     useEffect(() => {
         const fetchRecipes = async () => {
             try {
-                const response = await axios.get("http://localhost:5050/recipes");
+                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URI}/recipes`);
                 setRecipes(response.data);
                 setFilteredRecipes(response.data);
                 setLoading(false);
