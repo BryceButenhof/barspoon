@@ -1,0 +1,16 @@
+{
+  "name": "barspoon",
+  "version": "1.0.0",
+  "description": "Barspoon is a very simple cocktail recipe app utilizing the MERN stack",
+  "main": "index.js",
+  "scripts": {
+    "install-server": "cd server && npm install",
+    "start-server": "cd server && node app.js",
+    "install-client": "cd client && npm install",
+    "build-client": "cd client && npm run build",
+    "start-client": "cd client && npm run start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
