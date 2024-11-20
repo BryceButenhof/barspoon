@@ -60,20 +60,20 @@ const RecipeForm = (props) => {
             <div>
                 <label className={commonLabelStyle}>Ingredients</label>
                 {recipe.ingredients?.map((ingredient) => (
-                    <div className="flex flex-wrap" key={ingredient.id}>
-                        <button type="button" className="text-md rounded-lg bg-red-500 text-white w-[46px] h-[46px] mr-2" 
+                    <div className="flex" key={ingredient.id}>
+                        <button type="button" className="text-md rounded-lg bg-red-500 text-white min-w-[46px] h-[46px] mr-2" 
                             onClick={() => deleteIngredient(ingredient.id)}>
                             <FontAwesomeIcon icon={faTrash} size="sm" className="cursor-pointer"/>
                         </button>
-                        <input className={ingredientInputStyle + ' mr-2 flex-grow md:w-1/6'} 
+                        <input className={ingredientInputStyle + ' mr-2 min-w-[52px] w-1/6'} 
                             value={ingredient.quantity} type="number" step={0.01} 
                             onChange={(e) => updateIngredient('quantity', e.target.value, ingredient.id)} />
-                        <select className={ingredientInputStyle + ' md:mr-2'} value={ingredient.unit} onChange={(e) => updateIngredient('unit', e.target.value, ingredient.id)}>
+                        <select className={ingredientInputStyle + ' mr-2'} value={ingredient.unit} onChange={(e) => updateIngredient('unit', e.target.value, ingredient.id)}>
                             <option value="oz">oz</option>
                             <option value="dash">dash</option>
                             <option value="pinch">pinch</option>
                         </select>
-                        <input className={ingredientInputStyle + ' block flex-grow ml-[54px] md:ml-0'} value={ingredient.name}
+                        <input className={ingredientInputStyle + ' w-full'} value={ingredient.name}
                             type="text" onChange={(e) => updateIngredient('name', e.target.value, ingredient.id)}/>
                     </div>
                 ))}
@@ -81,7 +81,7 @@ const RecipeForm = (props) => {
             <button type="button" className="block text-md rounded-lg bg-blue-500 text-white w-[46px] h-[46px] mr-2" onClick={addIngredient}>
                 <FontAwesomeIcon icon={faPlus} size="sm" className="cursor-pointer"/>
             </button>                    
-            <button className="float-right block w-1/5 mb-24 p-2.5 border text-md rounded-lg bg-green-500 border-green-600 text-white" 
+            <button className="float-right block w-1/5 p-2.5 border text-md rounded-lg bg-green-500 border-green-600 text-white" 
                 type="submit">Save</button>
         </form>
     );

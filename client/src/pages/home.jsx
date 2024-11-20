@@ -54,7 +54,7 @@ const Home = () => {
             	Recipes
             </h1>
             <div className="flex justify-center">
-                <input type="text" className="border text-md rounded-lg block min-w-96 p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white"
+                <input type="text" className="border text-md rounded-lg block w-96 p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white"
                     placeholder="Search" onChange={(e) => filterRecipes(e.target.value)}/>
             </div>
             <ul className="flex flex-wrap justify-center gap-6 mt-12">

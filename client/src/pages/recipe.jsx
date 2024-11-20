@@ -69,9 +69,9 @@ const Recipe = () => {
             <p className="text-3xl font-bold m-12 text-center cursor-pointer" onClick={() => navigate(-1)}>
                 <FontAwesomeIcon icon={faArrowLeft} size="xs"/> Back
             </p>
-            <div className="flex items-center justify-center">
-                <div className="container mx-auto w-96">
-                    <div className="border bg-gray-700 border-gray-600 rounded-lg p-4 cursor-pointer w-96">
+            <div className="px-4 w-full">
+                <div className="flex items-center justify-center">
+                    <div className="border bg-gray-700 border-gray-600 rounded-lg p-4 cursor-pointer max-w-96">
                         <img src={recipe.imageUrl || defaultImgUrl} alt={recipe.name} className="w-full h-60 object-cover mb-4 rounded-lg" />
                         <h1 className="text-3xl font-bold my-8">{recipe.name}</h1>
                         <p className="my-4">{recipe.description}</p>
@@ -85,14 +85,14 @@ const Recipe = () => {
                         </ul>
                         <p className="my-4 font-bold">Instructions:</p>
                         <p className="my-4">{recipe.instructions}</p>
-                    </div>
-                    <div>
-                        <button className="float-right mt-2 mb-24 p-2.5 text-md rounded-lg bg-red-500 text-white w-24" onClick={() => setShowConfirm(true)}>
-                            Delete
-                        </button>
-                        <button className="float-right mt-2 mb-24 mr-2 p-2.5 text-md rounded-lg bg-blue-500 text-white w-24" onClick={() => editRecipe()}>
-                            Edit
-                        </button>
+                        <div className="mt-4">
+                            <button className="float-right p-2.5 text-md rounded-lg bg-red-500 text-white w-24" onClick={() => setShowConfirm(true)}>
+                                Delete
+                            </button>
+                            <button className="float-right mr-2 p-2.5 text-md rounded-lg bg-blue-500 text-white w-24" onClick={() => editRecipe()}>
+                                Edit
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
