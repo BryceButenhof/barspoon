@@ -9,7 +9,7 @@ const ConfirmDelete = (props) => {
 
     return (
         <div className="fixed inset-0 z-50 overflow-auto bg-black/40 backdrop-blur-sm flex fade-in">
-            <div className="relative md:bottom-72 border bg-gray-700 border-gray-600 rounded-lg p-8 w-full mx-4 max-w-sm md:max-w-md m-auto flex-col flex">
+            <div className="relative md:bottom-72 border bg-gray-700 border-gray-600 rounded-lg p-8 w-full mx-4 md:mx-auto max-w-sm md:max-w-md m-auto flex-col flex">
                 <h1 className="text-3xl font-bold">{recipeName}</h1>
                 <p className="mt-2">Are you sure you want to delete this recipe?</p>
                 <div className="mt-8">
