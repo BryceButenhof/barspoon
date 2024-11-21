@@ -6,7 +6,7 @@ const router = express.Router();
 //Get all recipes
 router.get('/', async (_, res) => {
     try {
-        res.status(200).json(await RecipeModel.find({}));
+        res.status(200).json(await RecipeModel.find({}).collation({ locale: "en" }).sort({ name: 1 }));
     } catch (error) {
         res.status(404).json(error);
     }
@@ -32,6 +32,7 @@ router.get('/:slug', async (req, res) => {
     }
 });
 
+//Update recipe
 router.patch('/:slug', async (req, res) => {
     try {
         res.status(204).json(await RecipeModel.findOneAndUpdate({ slug: req.params.slug }, new RecipeModel(req.body)));
