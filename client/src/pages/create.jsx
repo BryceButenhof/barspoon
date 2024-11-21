@@ -38,7 +38,7 @@ const Create = () => {
 
     return (
         <div className="flex items-center justify-center">
-            <div className="container mx-4 md:mx-0 md:w-1/2">
+            <div className="mx-4 md:mx-0 md:w-1/2">
                 <p className="text-3xl font-bold m-12 text-center">Create Recipe</p>
                 <RecipeForm recipe={recipe} setRecipe={setRecipe} saveRecipe={saveRecipe}/>
             </div>
