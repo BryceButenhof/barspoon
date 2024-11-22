@@ -20,13 +20,37 @@ const Edit = () => {
                 quantity: '',
                 unit: 'oz'
             }
-        ]
+        ],
+        ingredientString: ''
     };
 
     const [ recipe, setRecipe ] = useState(blankRecipe);
     const [ loading, setLoading ] = useState(true);
     const navigate = useNavigate();
     const { slug } = useParams();
+
+    const decodeIngredients = ingredients => {
+        let ingredientString = '';
+        ingredients.forEach(ingredient => {
+            ingredientString += `${ingredient.quantity} ${ingredient.unit} ${ingredient.name}\n`
+        });
+        return ingredientString.trim();
+    }
+
+    const encodeIngredients = ingredientString => {
+        const inputs = ingredientString.split('\n');
+        return inputs.map(input => {
+            let splitInput = input.split(' ');
+            if (splitInput.length > 2) {
+                splitInput = [...splitInput.splice(0, 2), splitInput.join(' ')];
+                return {
+                    quantity: splitInput[0],
+                    unit: splitInput[1],
+                    name: splitInput[2]
+                };
+            }
+        }).filter(x => !!x);
+    }
 
     useEffect(() => {
         const fetchRecipe = async () => {
@@ -39,7 +63,8 @@ const Edit = () => {
                             ...ingredient,
                             id: uuid()
                         };
-                    })
+                    }),
+                    ingredientString: decodeIngredients(response.data.ingredients)
                 });
                 setLoading(false);
             } catch (err) {
@@ -54,7 +79,8 @@ const Edit = () => {
 
     const saveRecipe = async (recipe) => {
         try {
-            await axios.patch(`${import.meta.env.VITE_BACKEND_URI}/recipes/${slug}`, recipe);
+            console.log(encodeIngredients(recipe.ingredientString));
+            await axios.patch(`${import.meta.env.VITE_BACKEND_URI}/recipes/${slug}`, { ...recipe, ingredients: encodeIngredients(recipe.ingredientString)});
             toast.success('Recipe edited successfully!');            
             navigate('/');
         } catch (error) {
@@ -73,7 +99,7 @@ const Edit = () => {
 
     return (
         <div className="flex items-center justify-center">
-            <div className="mx-4 md:mx-0 md:w-1/2">
+            <div className="mx-4 w-full md:mx-0 md:w-1/2">
                 <p className="text-3xl font-bold m-12 text-center">Edit Recipe</p>
                 <RecipeForm recipe={recipe} setRecipe={setRecipe} saveRecipe={saveRecipe} />
             </div>

@@ -19,15 +19,31 @@ const Create = () => {
                 quantity: '',
                 unit: 'oz'
             }
-        ]
+        ],
+        ingredientString: ''
     };
 
     const [recipe, setRecipe] = useState(blankRecipe);
     const navigate = useNavigate();
 
+    const encodeIngredients = ingredientString => {
+        const inputs = ingredientString.split('\n');
+        return inputs.map(input => {
+            let splitInput = input.split(' ');
+            if (splitInput.length > 2) {
+                splitInput = [...splitInput.splice(0, 2), splitInput.join(' ')];
+                return {
+                    quantity: splitInput[0],
+                    unit: splitInput[1],
+                    name: splitInput[2]
+                };
+            }
+        }).filter(x => !!x);
+    }
+
     const saveRecipe = async (recipe) => {
         try {
-            await axios.post(`${import.meta.env.VITE_BACKEND_URI}/recipes`, recipe);
+            await axios.post(`${import.meta.env.VITE_BACKEND_URI}/recipes`, { ...recipe, ingredients: encodeIngredients(recipe.ingredientString)});
             toast.success('Recipe created successfully!');            
             navigate('/');
         } catch (error) {
@@ -38,7 +54,7 @@ const Create = () => {
 
     return (
         <div className="flex items-center justify-center">
-            <div className="mx-4 md:mx-0 md:w-1/2">
+            <div className="mx-4 w-full md:mx-0 md:w-1/2">
                 <p className="text-3xl font-bold m-12 text-center">Create Recipe</p>
                 <RecipeForm recipe={recipe} setRecipe={setRecipe} saveRecipe={saveRecipe}/>
             </div>

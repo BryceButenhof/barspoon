@@ -57,6 +57,7 @@ const RecipeForm = (props) => {
                 <label className={commonLabelStyle}>Image URL</label>
                 <input className={commonInputStyle} type="url" value={recipe.imageUrl} onChange={(e) => setRecipe({...recipe, imageUrl: e.target.value})} />
             </div>
+            {/*
             <div>
                 <label className={commonLabelStyle}>Ingredients</label>
                 {recipe.ingredients?.map((ingredient) => (
@@ -78,10 +79,17 @@ const RecipeForm = (props) => {
                     </div>
                 ))}
             </div>
+            */}
+            <div>
+                <label className={commonLabelStyle}>Ingredients</label>
+                <textarea className={commonInputStyle} rows="8" value={recipe.ingredientString} onChange={(e) => setRecipe({...recipe, ingredientString: e.target.value})} />
+            </div>
+            {/*
             <button type="button" className="block text-md rounded-lg bg-blue-500 text-white w-[46px] h-[46px] mr-2" onClick={addIngredient}>
                 <FontAwesomeIcon icon={faPlus} size="sm" className="cursor-pointer"/>
-            </button>                    
-            <button className="float-right block w-1/5 p-2.5 border text-md rounded-lg bg-green-500 border-green-600 text-white" 
+            </button>     
+            */}               
+            <button className="float-right mt-4 block w-1/5 p-2.5 border text-md rounded-lg bg-green-500 border-green-600 text-white" 
                 type="submit">Save</button>
         </form>
     );
