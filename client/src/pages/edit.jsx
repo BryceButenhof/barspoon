@@ -38,18 +38,20 @@ const Edit = () => {
     }
 
     const encodeIngredients = ingredientString => {
-        const inputs = ingredientString.split('\n');
-        return inputs.map(input => {
-            let splitInput = input.split(' ');
-            if (splitInput.length > 2) {
-                splitInput = [...splitInput.splice(0, 2), splitInput.join(' ')];
-                return {
-                    quantity: splitInput[0],
-                    unit: splitInput[1],
-                    name: splitInput[2]
-                };
+        const result = [];
+        const ingredientStrings = ingredientString.split(/\r?\n/).filter(x => !!x);
+        ingredientStrings.forEach(x => {
+            const ingredient = x.match(/((\d+)?.?\d+)|((?<=\d\s?)\w+)|((?<=\w\s).*)/gi);
+            if (ingredient.length === 3) {
+                result.push({
+                    quantity: ingredient[0],
+                    unit: ingredient[1],
+                    name: ingredient[2]
+                });
             }
-        }).filter(x => !!x);
+        });
+
+        return result;
     }
 
     useEffect(() => {
@@ -79,7 +81,6 @@ const Edit = () => {
 
     const saveRecipe = async (recipe) => {
         try {
-            console.log(encodeIngredients(recipe.ingredientString));
             await axios.patch(`${import.meta.env.VITE_BACKEND_URI}/recipes/${slug}`, { ...recipe, ingredients: encodeIngredients(recipe.ingredientString)});
             toast.success('Recipe edited successfully!');            
             navigate('/');
