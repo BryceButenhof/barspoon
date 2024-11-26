@@ -3,7 +3,7 @@ import express from 'express';
 
 const router = express.Router();
 
-//Get all recipes
+// Get all recipes
 router.get('/', async (_, res) => {
     try {
         res.status(200).json(await RecipeModel.find({}).collation({ locale: "en" }).sort({ name: 1 }));
@@ -12,17 +12,26 @@ router.get('/', async (_, res) => {
     }
 });
 
-//Create recipe
+// Get multiple recipes
 router.post('/', async (req, res) => {
-    const newRecipe = new RecipeModel(req.body);
     try {
+        res.status(200).json(await RecipeModel.find({ slug: { $in: req.body }}));
+    } catch (error) {
+        res.status(400).json(error);
+    }
+});
+
+// Create recipe
+router.put('/', async (req, res) => {
+    try {
+        const newRecipe = new RecipeModel(req.body);
         res.status(201).json(await newRecipe.save());
     } catch (error) {
         res.status(400).json(error);
     }
 });
 
-//Get single recipe
+// Get single recipe
 router.get('/:slug', async (req, res) => {
     try {
         const recipe = await RecipeModel.findOne({ slug: req.params.slug });
@@ -32,7 +41,7 @@ router.get('/:slug', async (req, res) => {
     }
 });
 
-//Update recipe
+// Update recipe
 router.patch('/:slug', async (req, res) => {
     try {
         res.status(204).json(await RecipeModel.findOneAndUpdate({ slug: req.params.slug }, new RecipeModel(req.body)));
@@ -41,7 +50,7 @@ router.patch('/:slug', async (req, res) => {
     }
 });
 
-//Delete single recipe
+// Delete single recipe
 router.delete('/:slug', async (req, res) => {
     try {
         res.status(204).json(await RecipeModel.findOneAndDelete({ slug: req.params.slug }));

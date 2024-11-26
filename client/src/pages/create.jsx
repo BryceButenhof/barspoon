@@ -45,7 +45,7 @@ const Create = () => {
 
     const saveRecipe = async (recipe) => {
         try {
-            await axios.post(`${import.meta.env.VITE_BACKEND_URI}/recipes`, { ...recipe, ingredients: encodeIngredients(recipe.ingredientString)});
+            await axios.put(`${import.meta.env.VITE_BACKEND_URI}/recipes`, { ...recipe, ingredients: encodeIngredients(recipe.ingredientString)});
             toast.success('Recipe created successfully!');            
             navigate('/');
         } catch (error) {
