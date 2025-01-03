@@ -12,8 +12,8 @@ const Login = () => {
 
     const authenticate = async () => {
         try {
-            await axios.post(`${import.meta.env.VITE_BACKEND_URI}/auth/login`, userDetails);
-            localStorage.setItem("token", Response.data.token);
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URI}/auth/login`, userDetails);
+            localStorage.setItem("token", response.data.token);
             toast.success('Successfully logged in!');            
             navigate('/');
         } catch {
