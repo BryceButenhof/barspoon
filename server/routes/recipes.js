@@ -1,4 +1,5 @@
 import { RecipeModel } from "../models/recipeModel.js";
+import { AuthMiddelware } from "../middleware/auth.js";
 import express from 'express';
 
 const router = express.Router();
@@ -22,7 +23,7 @@ router.post('/', async (req, res) => {
 });
 
 // Create recipe
-router.put('/', async (req, res) => {
+router.put('/', AuthMiddelware, async (req, res) => {
     try {
         const newRecipe = new RecipeModel(req.body);
         res.status(201).json(await newRecipe.save());
@@ -42,7 +43,7 @@ router.get('/:slug', async (req, res) => {
 });
 
 // Update recipe
-router.patch('/:slug', async (req, res) => {
+router.patch('/:slug', AuthMiddelware, async (req, res) => {
     try {
         res.status(204).json(await RecipeModel.findOneAndUpdate({ slug: req.params.slug }, new RecipeModel(req.body)));
     } catch (error) {
@@ -51,7 +52,7 @@ router.patch('/:slug', async (req, res) => {
 });
 
 // Delete single recipe
-router.delete('/:slug', async (req, res) => {
+router.delete('/:slug', AuthMiddelware, async (req, res) => {
     try {
         res.status(204).json(await RecipeModel.findOneAndDelete({ slug: req.params.slug }));
     } catch (error) {

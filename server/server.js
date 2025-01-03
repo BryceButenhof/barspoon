@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import 'dotenv/config';
 import { RecipesRouter } from './routes/recipes.js';
 import { MenusRouter } from "./routes/menus.js";
+import { AuthRouter } from "./routes/auth.js";
 
 const PORT = process.env.PORT || 5050;
 const app = express();
@@ -14,6 +15,7 @@ app.use(cors());
 
 app.use("/recipes", RecipesRouter);
 app.use("/menus", MenusRouter);
+app.use("/auth", AuthRouter);
 
 mongoose.connect(process.env.ATLAS_URI);
 
