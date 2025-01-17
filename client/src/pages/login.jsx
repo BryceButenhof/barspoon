@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
 
@@ -13,7 +14,7 @@ const Login = () => {
     const authenticate = async () => {
         try {
             const response = await axios.post(`${import.meta.env.VITE_BACKEND_URI}/auth/login`, userDetails);
-            localStorage.setItem("token", response.data.token);
+            cookies.set("token", response.data.token, { expires: 1/1440 });
             toast.success('Successfully logged in!');            
             navigate('/');
         } catch {

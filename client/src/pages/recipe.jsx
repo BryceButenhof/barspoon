@@ -6,6 +6,7 @@ import axios from 'axios';
 import { toast } from "react-toastify";
 import ConfirmDelete from '../components/confirmDelete';
 import NotFound from '../components/notFound';
+import cookies from 'js-cookie';
 
 const Recipe = () => {
     const { slug } = useParams();
@@ -63,6 +64,23 @@ const Recipe = () => {
     if (Object.keys(recipe).length === 0) {
         return <NotFound />;
     }
+
+    const getButtons = () => {
+        if (cookies.get("token")) {
+            return (
+                <div className="mt-4">
+                    <button className="float-right p-2.5 text-md rounded-lg bg-red-500 text-white w-24" onClick={() => setShowConfirm(true)}>
+                        Delete
+                    </button>
+                    <button className="float-right mr-2 p-2.5 text-md rounded-lg bg-blue-500 text-white w-24" onClick={() => editRecipe()}>
+                        Edit
+                    </button>
+                </div>
+            );
+        } else {
+            return null;
+        }
+    };
     
     return (
         <>
@@ -85,14 +103,7 @@ const Recipe = () => {
                         </ul>
                         <p className="my-4 font-bold">Instructions:</p>
                         <p className="my-4">{recipe.instructions}</p>
-                        <div className="mt-4">
-                            <button className="float-right p-2.5 text-md rounded-lg bg-red-500 text-white w-24" onClick={() => setShowConfirm(true)}>
-                                Delete
-                            </button>
-                            <button className="float-right mr-2 p-2.5 text-md rounded-lg bg-blue-500 text-white w-24" onClick={() => editRecipe()}>
-                                Edit
-                            </button>
-                        </div>
+                        {getButtons()}
                     </div>
                 </div>
             </div>

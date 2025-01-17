@@ -1,16 +1,29 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faRightFromBracket, faRightToBracket } from '@fortawesome/free-solid-svg-icons'
+import cookies from 'js-cookie';
+import { toast } from "react-toastify";
 
 const NavBar = () => {
     const navigate = useNavigate();
 
+    const logout = () => {
+        cookies.remove('token');
+        toast.info('You have been logged out'); 
+        navigate('/');           
+    };
+
     const getLinks = () => {
-        if (localStorage.getItem("token")) {
-            return <FontAwesomeIcon icon={faPlus} size="lg" className="cursor-pointer" onClick={() => navigate('/create')}/>;
+        if (cookies.get("token")) {
+            return (
+                <div>
+                    <FontAwesomeIcon icon={faPlus} size="lg" className="cursor-pointer" onClick={() => navigate('/create')}/>
+                    <FontAwesomeIcon icon={faRightFromBracket} size="lg" className="cursor-pointer pl-6" onClick={() => logout()}/>
+                </div>
+            );
         } else {
-            return <p className="font-bold cursor-pointer text-xl" onClick={() => navigate('/login')}>Login</p>;
+            return <FontAwesomeIcon icon={faRightToBracket} size="lg" className="cursor-pointer" onClick={() => navigate('/login')}/>
         }
         
     };
