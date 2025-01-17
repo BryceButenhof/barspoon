@@ -38,7 +38,7 @@ const Login = () => {
                     </div>
                     <div>
                         <label className={commonLabelStyle}>Password</label>
-                        <input className={commonInputStyle} type="text" onChange={(e) => setUserDetails({...userDetails, password: e.target.value})} />
+                        <input className={commonInputStyle} type="password" onChange={(e) => setUserDetails({...userDetails, password: e.target.value})} />
                     </div>
                     <button className="float-right mt-4 block w-1/5 p-2.5 border text-md rounded-lg bg-green-500 border-green-600 text-white" 
                         type="submit">Login</button>
