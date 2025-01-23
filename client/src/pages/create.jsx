@@ -3,7 +3,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
 import { v4 as uuid } from 'uuid';
-import RecipeForm from "../components/recipeForm.jsx"
+import RecipeForm from "../components/recipeForm.jsx";
+import cookies from 'js-cookie';
 
 const Create = () => {
     const blankRecipe = {
@@ -45,7 +46,8 @@ const Create = () => {
 
     const saveRecipe = async (recipe) => {
         try {
-            await axios.put(`${import.meta.env.VITE_BACKEND_URI}/recipes`, { ...recipe, ingredients: encodeIngredients(recipe.ingredientString)});
+            const headers = { headers: {"Authorization" : `Bearer ${cookies.get("token")}`}}
+            await axios.put(`${import.meta.env.VITE_BACKEND_URI}/recipes`, { ...recipe, ingredients: encodeIngredients(recipe.ingredientString)}, headers);
             toast.success('Recipe created successfully!');            
             navigate('/');
         } catch (error) {

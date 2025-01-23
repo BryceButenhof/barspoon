@@ -5,6 +5,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import RecipeForm from '../components/recipeForm.jsx';
 import NotFound from '../components/notFound.jsx';
+import cookies from 'js-cookie';
 
 const Edit = () => {
     const blankRecipe = {
@@ -81,7 +82,8 @@ const Edit = () => {
 
     const saveRecipe = async (recipe) => {
         try {
-            await axios.patch(`${import.meta.env.VITE_BACKEND_URI}/recipes/${slug}`, { ...recipe, ingredients: encodeIngredients(recipe.ingredientString)});
+            const headers = { headers: {"Authorization" : `Bearer ${cookies.get("token")}`}};
+            await axios.patch(`${import.meta.env.VITE_BACKEND_URI}/recipes/${slug}`, { ...recipe, ingredients: encodeIngredients(recipe.ingredientString)}, headers);
             toast.success('Recipe edited successfully!');            
             navigate('/');
         } catch (error) {

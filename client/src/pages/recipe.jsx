@@ -41,7 +41,8 @@ const Recipe = () => {
 
     const deleteRecipe = async () => {
         try {
-            await axios.delete(`${import.meta.env.VITE_BACKEND_URI}/recipes/${recipe.slug}`);
+            const headers = { headers: {"Authorization" : `Bearer ${cookies.get("token")}`}};
+            await axios.delete(`${import.meta.env.VITE_BACKEND_URI}/recipes/${recipe.slug}`, headers);
             toast.success('Recipe successfully deleted');
             navigate('/');
         } catch (err) {

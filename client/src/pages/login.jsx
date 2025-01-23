@@ -14,7 +14,7 @@ const Login = () => {
     const authenticate = async () => {
         try {
             const response = await axios.post(`${import.meta.env.VITE_BACKEND_URI}/auth/login`, userDetails);
-            cookies.set("token", response.data.token, { expires: 1/1440 });
+            cookies.set("token", response.data.token, { expires: 1/24 });
             toast.success('Successfully logged in!');            
             navigate('/');
         } catch {
