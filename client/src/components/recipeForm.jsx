@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+import formData from 'form-data';
 
 const RecipeForm = (props) => {
     const commonLabelStyle = 'block m-2 text-md font-medium text-white';
@@ -9,7 +11,19 @@ const RecipeForm = (props) => {
         event.preventDefault();
         const slug = recipe.name.trim().toLowerCase().replace(/\(|\)/g, "").replaceAll(' ', '-');
         saveRecipe({...recipe, slug});
-    }
+    };
+
+    const uploadImage = async (image) => {
+        let body = new formData();
+        body.set('key', import.meta.env.VITE_IMGBB_KEY);
+        body.append('image', image);
+        
+        const response = await axios.post('https://api.imgbb.com/1/upload', body);
+        if (response) {
+            const url = response.data.data.url;
+            setRecipe({...recipe, imageUrl: url});
+        }
+    };
 
     return (
         <form onSubmit={handleSubmit}>
@@ -28,6 +42,10 @@ const RecipeForm = (props) => {
             <div>
                 <label className={commonLabelStyle}>Image URL</label>
                 <input className={commonInputStyle} type="url" value={recipe.imageUrl} onChange={(e) => setRecipe({...recipe, imageUrl: e.target.value})} />
+            </div>
+            <div>
+                <label className={commonLabelStyle}>Upload Image</label>
+                <input className={commonInputStyle} type="file" onChange={(e) => uploadImage(e.target.files[0])}/>
             </div>
             <div>
                 <label className={commonLabelStyle}>Ingredients</label>
